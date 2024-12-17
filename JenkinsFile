@@ -25,7 +25,7 @@ pipeline {
         success {
         slackSend channel: '#moses_ip1',
             color: 'good',
-            message: "Build ${env.BUILD_ID} was successful! View your site here: ${env.https://ip1-arfp.onrender.com}"
+            message: "Build ${env.BUILD_ID} was successful! View your site here: ${env.https://ip1-cuh1.onrender.com}"
         }   
         failure {
             mail to: 'moseskisoi035@gmail.com',
