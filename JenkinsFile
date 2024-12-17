@@ -1,0 +1,36 @@
+pipeline {
+    agent any
+    stages {
+        stage('Setup') {
+            steps {
+                sh 'npm install'
+            }
+        }
+        stage('Test') {
+            steps {
+                sh 'npm test'
+            }
+        }
+        stage('Deploy') {
+            steps {
+                sh 'node server'
+            }
+        }
+
+    }
+    post {
+        success {
+            echo 'Build Successful'
+        }
+        success {
+        slackSend channel: '#moses_ip1',
+            color: 'good',
+            message: "Build ${env.BUILD_ID} was successful! View your site here: ${env.https://ip1-arfp.onrender.com}"
+        }   
+        failure {
+            mail to: 'moseskisoi035@gmail.com',
+                subject: 'Build Failed',
+                body: 'The build failed. Please check the logs.'
+        }
+    }
+}
